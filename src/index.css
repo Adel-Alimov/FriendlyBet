@@ -1,0 +1,51 @@
+:root {
+    --borderBottom: #a06102;
+    --shadow: rgba(53, 53, 53, 0.5);
+    --title: #9a5f00;
+    --text: #724501;
+    --h1: #d8c09b;
+    --match: #fdf5e1;
+}
+
+#root {
+    max-width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-image: url(./assets/i.webp);
+    font-family: "Inter", sans-serif;
+}
+
+h1 {
+    margin: 0;
+    font-size: 4.5vw;
+    color: var(--h1);
+    font-family: "Bebas Neue", sans-serif;
+}
+
+h2 {
+    margin: 0;
+    color: var(--title);
+    font-size: 3vw;
+}
+
+p {
+    color: var(--title);
+}
+
+li {
+    font-size: 1.5vw;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    transition: scale 0.5s ease-in-out;
+}
+
+button:hover {
+    scale: 1.2;
+}
