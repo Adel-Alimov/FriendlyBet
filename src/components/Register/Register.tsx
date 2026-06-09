@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "./Register.module.css";
 import { signUp } from "../../services/auth.service";
+import { NavLink } from "react-router-dom";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -68,6 +69,9 @@ export const Register = () => {
                     <button className={styles.button} onClick={handleSubmit}>
                         <span>Регистрация</span>
                     </button>
+                    <p>
+                        Уже есть аккаунт? <NavLink to="/login">Войти</NavLink>
+                    </p>
                 </div>
             </div>
         </>

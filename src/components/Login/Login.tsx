@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import { signIn } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -46,6 +47,9 @@ export const Login = () => {
                     <button className={styles.button} onClick={handleSubmit}>
                         <span>Войти</span>
                     </button>
+                    <p>
+                        Нет аккаунта? <NavLink to="/register">Зарегистрироваться</NavLink>
+                    </p>
                 </div>
             </div>
         </>
