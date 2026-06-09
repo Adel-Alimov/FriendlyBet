@@ -76,9 +76,9 @@ export const MatchHero = () => {
                         <div className={styles.match}>
                             <h2>Матчи тура</h2>
                             <div className={styles.buttons}>
-                                <button className={styles.active}>Все матчи</button>
+                                {/* <button className={styles.active}>Все матчи</button>
                                 <button>Мои прогнозы</button>
-                                <button>Сделать прогноз</button>
+                                <button>Сделать прогноз</button> */}
                             </div>
                             <div className={styles.matches}>
                                 {matches.map((match) => {
@@ -101,7 +101,7 @@ export const MatchHero = () => {
                                 })}
                             </div>
                             <div className={styles.button}>
-                                <button className={styles.tableButton}>Смотреть все матчи</button>
+                                {/* <button className={styles.tableButton}>Смотреть все матчи</button> */}
                             </div>
                         </div>
                     </div>
@@ -131,9 +131,9 @@ export const MatchHero = () => {
                                 ))}
                             </div>
                             <div className={styles.button}>
-                                <button className={styles.tableButton}>
+                                {/* <button className={styles.tableButton}>
                                     Смотреть полный список
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         {/* <div className={styles.prediction}>
