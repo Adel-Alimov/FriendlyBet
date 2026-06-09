@@ -39,8 +39,6 @@ export const MatchPage = () => {
     } else {
         if (match) {
             return <MatchOpen match={match} />;
-        } else {
-            return "Страница не найдена";
         }
     }
 };
