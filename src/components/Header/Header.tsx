@@ -32,20 +32,45 @@ export const Header = () => {
                             alignItems: "center",
                         }}
                     >
-                        <li className={styles.borderBottom}>
-                            <NavLink to="/">Главная</NavLink>
+                        <li>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                                to="/"
+                            >
+                                Главная
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/matches">Матчи</NavLink>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                                to="/matches"
+                            >
+                                Матчи
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/my-predictions">Прогнозы</NavLink>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                                to="/my-predictions"
+                            >
+                                Прогнозы
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/ranking">Рейтинг</NavLink>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                                to="/ranking"
+                            >
+                                Рейтинг
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/rules">Правила</NavLink>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                                to="/rules"
+                            >
+                                Правила
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

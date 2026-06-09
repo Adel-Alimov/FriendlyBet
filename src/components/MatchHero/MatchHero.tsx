@@ -69,7 +69,7 @@ export const MatchHero = () => {
                             <h2>ГРУППОВОЙ ЭТАП</h2>
                             <p>11-28 июня 2026</p>
                             <div className={styles.tourBlock}>
-                                <p>Групповой этап уже идет</p>
+                                <p>Групповой этап начнется завтра</p>
                                 {/* <p style={{ fontSize: "1.5vw" }}>02дня 14ч 36мин 58сек</p> */}
                             </div>
                         </div>
@@ -110,8 +110,8 @@ export const MatchHero = () => {
                             <div className={styles.tourLeft}>
                                 <h2>О ТУРЕ</h2>
                                 <p>
-                                    Сделайте прогнозы на все матчи тура. За каждый угаданный исход{" "}
-                                    <b>1 балл</b>, За точный счет <b>3 балла</b>
+                                    Сделайте прогнозы на все матчи тура. За каждый угаданный исход
+                                    <b> 1 балл</b>, За точный счет <b>3 балла</b>
                                 </p>
                                 <p>Итоги буду подведены после завершения всех матчей</p>
                             </div>
@@ -136,7 +136,7 @@ export const MatchHero = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className={styles.prediction}>
+                        {/* <div className={styles.prediction}>
                             <h2>Мои прогнозы</h2>
                             <div className={styles.myPrediction}>
                                 <p>Сделано прогнозов</p>
@@ -146,7 +146,7 @@ export const MatchHero = () => {
                                 <p>Возможное количество очков</p>
                                 <p>18</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </>

@@ -6,6 +6,7 @@ import { MatchCard } from "../../components/MatchCard/MatchCard";
 import { getUserPredictions } from "../../services/predictions.service";
 import { Prediction } from "../../types/prediction";
 import { UserContext } from "../../context/UserContext";
+import { Header } from "../../components/Header/Header";
 
 export const MatchesPage = () => {
     const userCtx = useContext(UserContext)!;
@@ -48,6 +49,7 @@ export const MatchesPage = () => {
     } else {
         return (
             <>
+                <Header />
                 {matches.map((match) => {
                     const prediction = predictions.find(
                         (prediction) => match.id === prediction.match_id,

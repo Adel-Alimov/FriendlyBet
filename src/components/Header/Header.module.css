@@ -24,7 +24,7 @@ a {
     color: var(--text);
 }
 
-.borderBottom {
+a.active {
     border-bottom: 5px solid var(--borderBottom);
     border-radius: 5px;
 }
