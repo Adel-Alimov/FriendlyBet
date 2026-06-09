@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./Login.module.css";
 import { signIn } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export const Login = () => {
     });
     const [errorMessage, setErrorMessage] = useState("");
     const handleSubmit = async function () {
-        const { data, error } = await signIn(result.login, result.password);
+        const { error } = await signIn(result.login, result.password);
         if (error) {
             setErrorMessage(error.message);
         } else {

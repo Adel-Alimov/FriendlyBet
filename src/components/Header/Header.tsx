@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Header.module.css";
 import ball from "../../assets/ball.png";
 import { NavLink, useNavigate } from "react-router-dom";

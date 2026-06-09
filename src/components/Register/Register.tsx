@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./Register.module.css";
 import { signUp } from "../../services/auth.service";
 
@@ -13,7 +13,7 @@ export const Register = () => {
     });
     const [errorMessage, setErrorMessage] = useState("");
     const handleSubmit = async function () {
-        const { data, error } = await signUp(result.login, result.password, {
+        const { error } = await signUp(result.login, result.password, {
             data: {
                 person: result.name,
                 surname: result.surname,

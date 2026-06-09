@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./PredictionTable.module.css";
 import { Prediction } from "../../types/prediction";
 import { UserContext } from "../../context/UserContext";

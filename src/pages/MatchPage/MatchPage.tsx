@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MatchOpen } from "../../components/MatchOpen/MatchOpen";
 import { useParams } from "react-router-dom";
 import { Match } from "../../types/match";

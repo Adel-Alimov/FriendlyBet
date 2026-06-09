@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import worldCup from "../../assets/wc.png";
 import styles from "./MatchHero.module.css";
 import trophy from "../../assets/trophy.png";

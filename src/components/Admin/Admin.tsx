@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Match } from "../../types/match";
 import { getMatches } from "../../services/matches.service";
 import styles from "./Admin.module.css";
@@ -81,7 +81,6 @@ export const Admin = () => {
                                         team2_result: result.team2,
                                     })
                                     .eq("id", match.id);
-
                                 await calculateScores(match.id, result.team1, result.team2);
                             }}
                         >

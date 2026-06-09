@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getMatches } from "../../services/matches.service";
 import { Match } from "../../types/match";
 import styles from "./MatchesPage.module.css";
