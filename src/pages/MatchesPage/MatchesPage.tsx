@@ -1,33 +1,27 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { getMatches } from "../../services/matches.service";
-import { Match } from "../../types/match";
 import styles from "./MatchesPage.module.css";
 import { MatchCard } from "../../components/MatchCard/MatchCard";
 import { getUserPredictions } from "../../services/predictions.service";
-import { Prediction } from "../../types/prediction";
 import { UserContext } from "../../context/UserContext";
 import { Header } from "../../components/Header/Header";
+import { useQuery } from "@tanstack/react-query";
 
 export const MatchesPage = () => {
     const userCtx = useContext(UserContext)!;
-    const [loading, setLoading] = useState(true);
-    const [matches, setMatches] = useState<Match[]>([]);
 
-    const [predictions, setPredictions] = useState<Prediction[]>([]);
+    const { data: predictions, isLoading: predictionsLoading } = useQuery({
+        queryKey: ["predictions", userCtx!.user?.id],
+        queryFn: () => getUserPredictions(userCtx!.user?.id!),
+        enabled: !!userCtx!.user?.id,
+    });
 
-    useEffect(() => {
-        const load = async () => {
-            if (userCtx.user?.id) {
-                const data = await getUserPredictions(userCtx.user.id);
-                const match = await getMatches();
-                if (data) setPredictions(data);
-                if (match) setMatches(match);
-            }
-            setLoading(false);
-        };
-        load();
-    }, []);
-    if (loading) {
+    const { data: matches, isLoading: matchesLoading } = useQuery({
+        queryKey: ["matches"],
+        queryFn: getMatches,
+    });
+
+    if (matchesLoading || predictionsLoading) {
         return (
             <>
                 <div className={styles.loader}>
@@ -50,8 +44,8 @@ export const MatchesPage = () => {
         return (
             <>
                 <Header />
-                {matches.map((match) => {
-                    const prediction = predictions.find(
+                {(matches ?? []).map((match) => {
+                    const prediction = (predictions ?? []).find(
                         (prediction) => match.id === prediction.match_id,
                     );
                     return (

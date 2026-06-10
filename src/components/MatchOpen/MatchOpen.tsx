@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./MatchOpen.module.css";
 import { Match } from "../../types/match";
 import { UserContext } from "../../context/UserContext";
 import { supabase } from "../../lib/supabase";
 import { useNavigate } from "react-router-dom";
 import { getPrediction } from "../../services/predictions.service";
+import { useQuery } from "@tanstack/react-query";
 
 interface MatchProps {
     match: Match;
@@ -16,18 +17,15 @@ export const MatchOpen = ({ match }: MatchProps) => {
         team1: 0,
         team2: 0,
     });
-    const [doPredict, setDoPredict] = useState(false);
-    const [loading, setLoading] = useState(true);
+
     const userCtx = useContext(UserContext)!;
-    useEffect(() => {
-        const load = async () => {
-            const predict = await getPrediction(userCtx.user?.id!, match.id);
-            if (predict && predict.length > 0) setDoPredict(true);
-            setLoading(false);
-        };
-        load();
-    }, [userCtx.user?.id]);
-    if (loading) {
+
+    const { data: predictions, isLoading: predictionsLoading } = useQuery({
+        queryKey: ["predictions", userCtx.user?.id!, match.id],
+        queryFn: () => getPrediction(userCtx.user?.id!, match.id),
+        enabled: !!userCtx.user?.id,
+    });
+    if (predictionsLoading) {
         return (
             <>
                 <div className={styles.loader}>
@@ -46,7 +44,7 @@ export const MatchOpen = ({ match }: MatchProps) => {
                 </div>
             </>
         );
-    } else if (doPredict) {
+    } else if ((predictions?.length ?? 0) > 0) {
         return <h1 style={{ color: "black", textAlign: "center" }}>Прогноз уже сделан</h1>;
     } else {
         return (

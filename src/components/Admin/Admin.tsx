@@ -4,11 +4,18 @@ import { getMatches } from "../../services/matches.service";
 import styles from "./Admin.module.css";
 import { supabase } from "../../lib/supabase";
 import { calculateScores } from "../../services/ranking.service";
+// import { useQuery } from "@tanstack/react-query";
 
 export const Admin = () => {
     const [mathes, setMatches] = useState<Match[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState<Record<number, { team1: number; team2: number }>>({});
+
+    // const { data: matches, isLoading: matchesLoading } = useQuery({
+    //     queryKey: ["matches"],
+    //     queryFn: getMatches,
+    // });
+
     useEffect(() => {
         const load = async () => {
             const match = await getMatches();

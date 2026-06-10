@@ -1,29 +1,25 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styles from "./PredictionTable.module.css";
-import { Prediction } from "../../types/prediction";
 import { UserContext } from "../../context/UserContext";
 import { getUserPredictions } from "../../services/predictions.service";
-import { Match } from "../../types/match";
 import { getMatches } from "../../services/matches.service";
+import { useQuery } from "@tanstack/react-query";
 
 export const PredictionTable = () => {
     const userCtx = useContext(UserContext);
-    const [prediction, setPrediction] = useState<Prediction[] | null>(null);
-    const [mathes, setMatches] = useState<Match[] | null>(null);
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const load = async () => {
-            if (userCtx?.user?.id) {
-                const data = await getUserPredictions(userCtx.user?.id!);
-                const match = await getMatches();
-                setPrediction(data);
-                setMatches(match);
-                setLoading(false);
-            }
-        };
-        load();
-    }, [userCtx?.user]);
-    if (loading) {
+
+    const { data: predictions, isLoading: predictionsLoading } = useQuery({
+        queryKey: ["predictions", userCtx!.user?.id],
+        queryFn: () => getUserPredictions(userCtx!.user?.id!),
+        enabled: !!userCtx!.user?.id,
+    });
+
+    const { data: matches, isLoading: matchesLoading } = useQuery({
+        queryKey: ["matches"],
+        queryFn: getMatches,
+    });
+
+    if (predictionsLoading || matchesLoading) {
         return (
             <>
                 <div className={styles.loader}>
@@ -45,9 +41,9 @@ export const PredictionTable = () => {
     } else {
         return (
             <>
-                <p>Сделано прогнозов: {prediction?.length ?? 0}</p>
-                {prediction?.map((predict) => {
-                    const match = mathes?.find((m) => m.id === predict.match_id);
+                <p>Сделано прогнозов: {predictions?.length ?? 0}</p>
+                {predictions?.map((predict) => {
+                    const match = matches?.find((m) => m.id === predict.match_id);
                     return (
                         <div key={predict.match_id} className={styles.prediction}>
                             <p>

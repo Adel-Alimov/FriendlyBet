@@ -1,22 +1,27 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { getRanking } from "../../services/ranking.service";
 import { User } from "../../types/user";
 import styles from "./Rank.module.css";
+import { useQuery } from "@tanstack/react-query";
 
 export const Rank = () => {
     const userCtx = useContext(UserContext);
-    const [loading, setLoading] = useState(true);
-    const [rank, setRank] = useState<User[] | null>(null);
-    useEffect(() => {
-        const load = async () => {
-            const data = await getRanking();
-            if (data) setRank(data);
-            setLoading(false);
-        };
-        load();
-    }, [userCtx?.user]);
-    if (loading) {
+
+    const { data: rank, isLoading: rankLoading } = useQuery({
+        queryKey: ["rank", userCtx?.user],
+        queryFn: getRanking,
+    });
+
+    // useEffect(() => {
+    //     const load = async () => {
+    //         const data = await getRanking();
+    //         if (data) setRank(data);
+    //         setLoading(false);
+    //     };
+    //     load();
+    // }, [userCtx?.user]);
+    if (rankLoading) {
         return (
             <>
                 <div className={styles.loader}>

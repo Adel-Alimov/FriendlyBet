@@ -1,39 +1,34 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import worldCup from "../../assets/wc.png";
 import styles from "./MatchHero.module.css";
 import trophy from "../../assets/trophy.png";
 import { MatchCard } from "../MatchCard/MatchCard";
 import { getUserPredictions } from "../../services/predictions.service";
 import { UserContext } from "../../context/UserContext";
-import { Prediction } from "../../types/prediction";
 import { getMatches } from "../../services/matches.service";
-import { Match } from "../../types/match";
-import { User } from "../../types/user";
 import { getRanking } from "../../services/ranking.service";
+import { useQuery } from "@tanstack/react-query";
 
 export const MatchHero = () => {
     const userCtx = useContext(UserContext)!;
-    const [predictions, setPredictions] = useState<Prediction[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [matches, setMatches] = useState<Match[]>([]);
-    const [rank, setRank] = useState<User[] | null>(null);
 
-    useEffect(() => {
-        const load = async () => {
-            if (userCtx.user?.id) {
-                const data = await getUserPredictions(userCtx.user.id);
-                const match = await getMatches();
-                console.log(match);
-                const rankData = await getRanking();
-                if (rankData) setRank(rankData);
-                if (data) setPredictions(data);
-                if (match) setMatches(match);
-            }
-            setLoading(false);
-        };
-        load();
-    }, [userCtx.user]);
-    if (loading) {
+    const { data: matches, isLoading: matchesLoading } = useQuery({
+        queryKey: ["matches"],
+        queryFn: getMatches,
+    });
+
+    const { data: rank } = useQuery({
+        queryKey: ["ranking"],
+        queryFn: getRanking,
+    });
+
+    const { data: predictions, isLoading: predictionsLoading } = useQuery({
+        queryKey: ["predictions", userCtx.user?.id],
+        queryFn: () => getUserPredictions(userCtx.user?.id!),
+        enabled: !!userCtx.user?.id,
+    });
+
+    if (matchesLoading || predictionsLoading) {
         return (
             <>
                 <div className={styles.loader}>
@@ -81,8 +76,8 @@ export const MatchHero = () => {
                                 <button>Сделать прогноз</button> */}
                             </div>
                             <div className={styles.matches}>
-                                {matches.map((match) => {
-                                    const prediction = predictions.find(
+                                {(matches ?? []).map((match) => {
+                                    const prediction = predictions?.find(
                                         (prediction) => match.id === prediction.match_id,
                                     );
                                     return (
@@ -94,8 +89,8 @@ export const MatchHero = () => {
                                             team1={match.team1}
                                             team2={match.team2}
                                             hasPrediction={prediction ? true : false}
-                                            predictTeam1={prediction?.team1_score!}
-                                            predictTeam2={prediction?.team2_score!}
+                                            predictTeam1={prediction?.team1_score ?? 0}
+                                            predictTeam2={prediction?.team2_score ?? 0}
                                         />
                                     );
                                 })}
