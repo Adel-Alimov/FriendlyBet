@@ -30,29 +30,34 @@ export const MatchCard = ({
                     <p>{date}</p>
                     <p>{time}</p>
                 </div>
-                <p>{team1}</p>
-                <p>vs</p>
-                <p>{team2}</p>
-                {hasPrediction ? (
-                    <div className={styles.completePredict}>
-                        <div className={styles.predict}>
-                            <p>Прогноз сделан</p>
-                            <div className={styles.result}>
-                                <p>{predictTeam1}</p>
-                                <p>:</p>
-                                <p>{predictTeam2}</p>
+                <div className={styles.comand}>
+                    <div className={styles.comandText}>
+                        <p>{team1}</p>
+                        <p>vs</p>
+                        <p>{team2}</p>
+                    </div>
+
+                    {hasPrediction ? (
+                        <div className={styles.completePredict}>
+                            <div className={styles.predict}>
+                                <p>Прогноз сделан</p>
+                                <div className={styles.result}>
+                                    <p>{predictTeam1}</p>
+                                    <p>:</p>
+                                    <p>{predictTeam2}</p>
+                                </div>
                             </div>
+                            <p>🔒</p>
                         </div>
-                        <p>🔒</p>
-                    </div>
-                ) : (
-                    <div className={styles.doPrediction}>
-                        <div className={styles.doPredict}>
-                            <p>Сделать прогноз</p>
+                    ) : (
+                        <div className={styles.doPrediction}>
+                            <div className={styles.doPredict}>
+                                <p>Сделать прогноз</p>
+                            </div>
+                            <p>⟩</p>
                         </div>
-                        <p>⟩</p>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </>
     );
