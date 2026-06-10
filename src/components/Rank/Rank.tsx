@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { getRanking } from "../../services/ranking.service";
-import { User } from "../../types/user";
 import styles from "./Rank.module.css";
 import { useQuery } from "@tanstack/react-query";
 
