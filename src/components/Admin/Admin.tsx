@@ -81,6 +81,8 @@ export const Admin = () => {
                         <button
                             onClick={async () => {
                                 const result = results[match.id];
+                                console.log("saving", match.id, result.team1, result.team2);
+
                                 await supabase
                                     .from("matches")
                                     .update({
@@ -88,7 +90,9 @@ export const Admin = () => {
                                         team2_result: result.team2,
                                     })
                                     .eq("id", match.id);
+                                console.log("calling calculateScores");
                                 await calculateScores(match.id, result.team1, result.team2);
+                                console.log("done");
                             }}
                         >
                             Сохранить
