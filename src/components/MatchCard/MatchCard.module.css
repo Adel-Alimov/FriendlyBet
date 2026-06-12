@@ -93,6 +93,9 @@
 }
 
 @media screen and (max-width: 800px) {
+    .matchesRow {
+        width: 60vw;
+    }
     .comand {
         margin: 0;
         margin-left: 10px;
@@ -102,7 +105,13 @@
     .comandText {
         font-size: 10px;
     }
+    .completePredict {
+        width: 30vw;
+        height: 30px;
+        font-size: 9px;
+    }
     .doPredict {
+        padding: 5px 15px;
         width: 20vw;
         height: 30px;
     }

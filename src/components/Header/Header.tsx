@@ -22,6 +22,10 @@ export const Header = () => {
                 <h2>Friendly Bet</h2>
 
                 <nav>
+                    {/* <input type="checkbox" id="burgerToggle" />
+                    <label htmlFor="burgerToggle">
+                        <span></span>
+                    </label> */}
                     <ul
                         style={{
                             listStyle: "none",
